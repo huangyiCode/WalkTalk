@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#2daf9c</color>
-    <color name="colorPrimaryDark">#2fbca7</color>
-    <color name="colorAccent">#5dd4c3</color>
+    <color name="colorPrimaryDark">#2daf9c</color>
+    <color name="colorAccent">#35beaa</color>
 
     <!--基本色-->
     <color name="white">#FFF</color>
-    <color name="black">#000</color>
+    <color name="black">#aa000000</color>
 
     <!--灰度色,16进制80表示RGB均为128-->
+
     <color name="gray_240">#F0F0F0</color>
+    <color name="gray_230">#F0EFF5</color>
     <color name="gray_224">#E0E0E0</color>
     <color name="gray_192">#C0C0C0</color>
     <color name="gray_160">#A0A0A0</color>

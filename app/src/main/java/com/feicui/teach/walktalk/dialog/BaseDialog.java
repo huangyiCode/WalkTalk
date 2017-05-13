@@ -23,7 +23,7 @@ public abstract class BaseDialog extends Dialog {
     LayoutInflater inflater;
     Context mContext;
 
-    public BaseDialog(Context context, int layoutId) {
+    BaseDialog(Context context, int layoutId) {
         super(context, R.style.Dialog_Fullscreen);
         this.mContext = context;
         inflater = (LayoutInflater) context.getSystemService

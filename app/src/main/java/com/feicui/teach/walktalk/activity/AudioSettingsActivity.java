@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import com.feicui.teach.walktalk.BaseActivity;
+import com.feicui.teach.walktalk.R;
+import com.feicui.teach.walktalk.dialog.TalkTypeDialog;
 
 /**
  * Created by huangYi on 2017/5/12 0012.

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/transparency_500"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/shape_cicle_white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/rg__dialog_talk_type"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textSize="@dimen/text_size_medium"
+                android:textColor="@color/colorPrimary"
+                android:text="对讲类型"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:button="@null"
+                android:id="@+id/rb_dialog_talk_type_first"
+                android:padding="2dp"
+                android:background="@drawable/select_cicle_primary2gray"
+                android:textColor="@color/white"
+                android:text="广播"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:button="@null"
+                android:id="@+id/rb_dialog_talk_type_second"
+                android:padding="2dp"
+                android:background="@drawable/select_cicle_primary2gray"
+                android:textColor="@color/white"
+                android:text="组播"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:button="@null"
+                android:id="@+id/rb_dialog_talk_type_thrid"
+                android:padding="2dp"
+                android:background="@drawable/select_cicle_primary2gray"
+                android:textColor="@color/white"
+                android:text="单播"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+        </RadioGroup>
+        <View
+            android:layout_marginTop="10dp"
+            android:background="@color/gray_224"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+            <Button
+                android:id="@+id/btn_talk_type_cancel"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/select_white2gray"
+                android:text="取消"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <View
+                android:background="@color/gray_224"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+            <Button
+                android:id="@+id/btn_talk_type_sure"
+                android:textSize="@dimen/text_size_large"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/select_white2gray"
+                android:text="确定"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
