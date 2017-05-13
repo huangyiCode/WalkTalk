@@ -46,6 +46,7 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
         <Button
+            android:id="@+id/btn_home_stop_talk"
             android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"

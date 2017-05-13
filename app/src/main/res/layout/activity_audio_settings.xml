@@ -1,7 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="@color/gray_224"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:background="@drawable/select_white2gray"
+        android:paddingRight="@dimen/margin_left"
+        android:paddingLeft="@dimen/margin_left"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/black"
+            android:text="使用自带编解码器"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/cb_audio_settings_use_self_code"
+            android:button="@null"
+            android:background="@drawable/select_settings_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="@color/gray_224"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/ll_audio_settings_code_rate"
+        android:background="@drawable/select_white2gray"
+        android:paddingRight="@dimen/margin_left"
+        android:paddingLeft="@dimen/margin_left"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/black"
+            android:text="编解码率"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:id="@+id/ll_talk_type_broadcast_address"
+        android:background="@drawable/select_white2gray"
+        android:paddingRight="@dimen/margin_left"
+        android:paddingLeft="@dimen/margin_left"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="@dimen/text_size_xlarge"
+            android:textColor="@color/black"
+            android:text="回显"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/cb_audio_settings_use_review"
+            android:button="@null"
+            android:background="@drawable/select_settings_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

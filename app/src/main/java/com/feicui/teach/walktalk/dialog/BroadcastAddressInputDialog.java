@@ -51,8 +51,8 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
 
     private void init() {
         mTeBroadcastAddress.addTextChangedListener(this);
-        mTvBroadCaseType.setText(type.getTypeName());
-        mTeBroadcastAddress.setHint(type.getTypeName());
+        mTvBroadCaseType.setText(type.getTypeName());;
+        mTlBroadcastAddress.setHint(type.getTypeName());
     }
 
     @OnClick({R.id.btn_broadcast_address_cancel,R.id.btn_broadcast_address_sure})

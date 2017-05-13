@@ -29,6 +29,7 @@ public class FirstActivity extends BaseActivity{
      */
     @OnClick(R.id.btn_home_start) void gotoNext(){
         openActivity(HomeActivity.class);
+        finish();
     }
 
 }

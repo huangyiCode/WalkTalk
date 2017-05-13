@@ -15,6 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
             <TextView
+                android:layout_margin="@dimen/margin_left"
                 android:textSize="@dimen/text_size_medium"
                 android:textColor="@color/colorPrimary"
                 android:text="端口号"

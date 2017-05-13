@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_marginTop="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="4dp"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/shap_cicle_primary"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:id="@+id/tv_item_code_rate_code"
+            android:textColor="@color/colorPrimary"
+            android:text="CODE_RATE"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <CheckBox
+            android:id="@+id/cb_item_code_rate_code"
+            android:background="@drawable/select_code_rate_checked"
+            android:button="@null"
+            android:layout_width="25dp"
+            android:layout_height="25dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
