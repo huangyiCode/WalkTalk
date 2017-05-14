@@ -3,53 +3,93 @@ package com.feicui.teach.walktalk.utils;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.util.Config;
+import android.os.Process;
+import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/5/14 0014.
  * 录音工具类
  */
 
-public class VoiceGetter {
+public class VoiceGetter extends Thread {
 
     /**
      * 录音器
      */
-    public  AudioRecord mAudioRecord;
+    private   AudioRecord mAudioRecord;
 
     /**
      * 数据缓存
      */
-    public  byte[] mBuffer=new byte[320];
+    private  byte[] mBuffer;
 
     /**
      * 是否暂停数据读取
      */
-    public  boolean isStop;
+    private  boolean isStop;
 
 
     /**
      * 开始录音
      */
-    public  void startGetterVoice(){
-        isStop=false;
+    private  void startGetterVoice() {
+        isStop = false;
         initAudioRecord();
         //录音器开始录音
-       mAudioRecord.startRecording();
+        mAudioRecord.startRecording();
 
         /**
-         * 此处需要判断是否使用系统的编码解码方式进行处理
+         * 初始化Socket
          */
-        while (!isStop){
-            if(SystemSettings.USE_SPEEX){//Speex
+        try {
+            UDPUtil.initSocket();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            }else{//系统
-                mAudioRecord.read(mBuffer,0,320);
+        /**
+         * 初始化缓存数据
+         */
+        if (SystemSettings.USE_SPEEX) {//Speex
+
+        } else {//系统
+            mBuffer = new byte[320];
+
+        }
+
+
+        /**
+         * 封装数据包
+         */
+        UDPUtil.packSendData(mBuffer);
+
+
+        /**
+         * 此处需要不停的获取数据----->传输数据
+         */
+        while (!isStop) {
+            /**
+             * 此处需要判断是否使用系统的编码解码方式进行处理
+             *   读取录音信息
+             */
+            int len = 0;
+            if (SystemSettings.USE_SPEEX) {//Speex
+
+            } else {//系统
+                len = mAudioRecord.read(mBuffer, 0, 320);
             }
+
+            /**
+             * 读取到录音结果之后需要将声音使用UDP进行传输
+             */
+
+            UDPUtil.sendVoiceData();
         }
     }
 
-    /**
+
+
+        /**
      * 结束录音
      */
     public  void finishGetterVoice(){
@@ -60,14 +100,24 @@ public class VoiceGetter {
     /**
      * 初始化音频播放
      */
-    public void initAudioRecord(){
+    private void initAudioRecord(){
         mAudioRecord=new AudioRecord(MediaRecorder.AudioSource.MIC, 44100, /*AudioFormat.CHANNEL_IN_STEREO*/2, AudioFormat.ENCODING_PCM_16BIT, AudioConfig.AUDIO_RECORD_BUFFER);
     }
 
     /**
      * 释放资源
      */
-    public void releaseAudioRecord(){
+    private void releaseAudioRecord(){
+        //关闭Socket
+        UDPUtil.releaseSocket();
+        //关闭录音机器
         mAudioRecord.release();
+
+    }
+
+    @Override
+    public void run() {
+        Process.setThreadPriority(Process.THREAD_PRIORITY_URGENT_AUDIO);
+        startGetterVoice();
     }
 }

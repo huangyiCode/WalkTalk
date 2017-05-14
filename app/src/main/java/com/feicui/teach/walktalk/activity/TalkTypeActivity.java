@@ -8,6 +8,7 @@ import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.dialog.BroadcastAddressInputDialog;
 import com.feicui.teach.walktalk.dialog.PortDialog;
 import com.feicui.teach.walktalk.dialog.TalkTypeDialog;
+import com.feicui.teach.walktalk.utils.BroadCastType;
 
 import butterknife.OnClick;
 
@@ -42,17 +43,17 @@ public class TalkTypeActivity extends BaseActivity implements TalkTypeDialog.OnT
                 port.show();
                 break;
             case R.id.ll_talk_type_broadcast_address://广播地址
-                BroadcastAddressInputDialog broadAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadcastAddressInputDialog.BroadCastType.BROADCAST_ADDRESS);
+                BroadcastAddressInputDialog broadAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadCastType.BROADCAST_ADDRESS);
                 broadAddress.setOnBroadcastInputDialogFinishResultListener(this);
                 broadAddress.show();
                 break;
             case R.id.ll_talk_type_group_broadcast_address://组播地址
-                BroadcastAddressInputDialog groupAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadcastAddressInputDialog.BroadCastType.BROADCAST_GROUP_ADDRESS);
+                BroadcastAddressInputDialog groupAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadCastType.BROADCAST_GROUP_ADDRESS);
                 groupAddress.setOnBroadcastInputDialogFinishResultListener(this);
                 groupAddress.show();
                 break;
             case R.id.ll_talk_type_single_broadcast_address://单播地址
-                BroadcastAddressInputDialog singleAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadcastAddressInputDialog.BroadCastType.BROADCAST_SINGLE_ADDRESS);
+                BroadcastAddressInputDialog singleAddress=new BroadcastAddressInputDialog(this,R.layout.dialog_broad_address, BroadCastType.BROADCAST_SINGLE_ADDRESS);
                 singleAddress.setOnBroadcastInputDialogFinishResultListener(this);
                 singleAddress.show();
                 break;
@@ -83,7 +84,7 @@ public class TalkTypeActivity extends BaseActivity implements TalkTypeDialog.OnT
      * @param type 广播类型
      */
     @Override
-    public void onBroadcastInputResult(String address, BroadcastAddressInputDialog.BroadCastType type) {
+    public void onBroadcastInputResult(String address,BroadCastType type) {
 
     }
 }

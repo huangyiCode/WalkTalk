@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.feicui.teach.walktalk.R;
+import com.feicui.teach.walktalk.utils.BroadCastType;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -51,8 +52,8 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
 
     private void init() {
         mTeBroadcastAddress.addTextChangedListener(this);
-        mTvBroadCaseType.setText(type.getTypeName());;
-        mTlBroadcastAddress.setHint(type.getTypeName());
+        mTvBroadCaseType.setText(type.getTypeName()+"地址");;
+        mTlBroadcastAddress.setHint(type.getTypeName()+"地址");
     }
 
     @OnClick({R.id.btn_broadcast_address_cancel,R.id.btn_broadcast_address_sure})
@@ -103,32 +104,6 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
       }else{
           mTlBroadcastAddress.setError("请输入"+type.getTypeName());
       }
-    }
-
-    /**
-     * 广播类型
-     */
-    public enum  BroadCastType{
-      BROADCAST_ADDRESS {
-          @Override
-          String getTypeName() {
-              return "广播地址";
-          }
-      },BROADCAST_GROUP_ADDRESS {
-            @Override
-            String getTypeName() {
-                return "组播地址";
-            }
-        },BROADCAST_SINGLE_ADDRESS {
-            @Override
-            String getTypeName() {
-                return "单播地址";
-            }
-        };
-
-
-        abstract String getTypeName();
-
     }
 
 }

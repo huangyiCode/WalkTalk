@@ -1,6 +1,11 @@
 package com.feicui.teach.walktalk.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.feicui.teach.walktalk.BaseActivity;
 import com.feicui.teach.walktalk.R;
@@ -20,6 +25,16 @@ public class FirstActivity extends BaseActivity{
 
     @Override
     protected void initView() {
+        /**
+         * 需要申请6.0权限
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(PackageManager.PERMISSION_GRANTED==checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+            }else{
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},100);
+            }
+        }
 
     }
 
@@ -32,4 +47,13 @@ public class FirstActivity extends BaseActivity{
         finish();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+
+        }else{
+            Toast.makeText(mContext, "需要同意此权限!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
 }

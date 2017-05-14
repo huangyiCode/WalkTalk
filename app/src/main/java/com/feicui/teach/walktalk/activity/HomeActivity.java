@@ -1,6 +1,8 @@
 package com.feicui.teach.walktalk.activity;
 
 import android.media.AudioManager;
+import android.media.AudioTrack;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,6 +14,13 @@ import com.feicui.teach.walktalk.BaseActivity;
 import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.dialog.BaseDialog;
 import com.feicui.teach.walktalk.dialog.SpeakingDialog;
+import com.feicui.teach.walktalk.utils.VoiceGetter;
+import com.feicui.teach.walktalk.utils.VoicePlayer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +30,21 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
     @BindView(R.id.btn_home_stop_talk)
     Button mBtnStopTalk;
 
+    /**
+     * 通话中
+     */
     SpeakingDialog mSpeakingDialog;
+
+    /**
+     * 录音
+     */
+    VoiceGetter mVoiceGetter;
+
+    /**
+     * 播放
+     *
+     */
+    VoicePlayer mVoicePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,14 +98,53 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
 
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN://开始录音
-                mSpeakingDialog.show();
+                startGetVoice();
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL://录音结束
-                mSpeakingDialog.cancel();
-
+                stopGetVoice();
                 break;
         }
         return true;
+    }
+
+    /**
+     * 开始录音
+     */
+    public void startGetVoice(){
+        mSpeakingDialog.show();
+        mVoiceGetter=new VoiceGetter();
+        mVoiceGetter.start();
+    }
+
+    /**
+     * 结束录音
+     */
+    public void stopGetVoice(){
+        mSpeakingDialog.cancel();
+        mVoiceGetter.finishGetterVoice();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        /**
+         * 开始接收别人传递过来的数据信息
+         */
+        mVoicePlayer=new VoicePlayer();
+        mVoicePlayer.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        /**
+         * 停止接收他人传递的信息
+         */
+        //关闭VoicePlayer
+        if(mVoicePlayer != null) {
+            mVoicePlayer.finishVoicePlayer();
+            mVoicePlayer = null;
+        }
     }
 }
