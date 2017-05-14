@@ -13,6 +13,16 @@ public class SystemSettings {
     public static boolean USE_SPEEX=false;
 
     /**
+     * 使用的Speex的品质
+     */
+    public static int SPEEX_QUALITY=1;
+
+    /**
+     * 是否回显
+     */
+    public static boolean IS_ECHO;
+
+    /**
      * 使用的广播类型
      */
     public static BroadCastType CAST_TYPE=BroadCastType.BROADCAST_ADDRESS;
@@ -35,5 +45,12 @@ public class SystemSettings {
     /**
      * 端口号
      */
-    public static int PORT;
+    public static long PORT_NUMBER;
+
+
+
+
+
+
+
 }

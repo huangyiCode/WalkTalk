@@ -1,34 +1,38 @@
 package com.feicui.teach.walktalk.utils;
 
+import android.util.Log;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.SocketException;
 
 /**
  * Created by Administrator on 2017/5/14 0014.
+ *
+ * 注意:此处需要两个不同的对象  去掉所有的static
  */
 
 public class UDPUtil {
     //用到时网络编程方面的知识
     //使用的是UDP协议
-    private static DatagramSocket mDatagramSocket;
+    private  DatagramSocket mDatagramSocket;
     //组播的套接字
-    private static MulticastSocket mMultiSocket;
+    private  MulticastSocket mMultiSocket;
     //数据包
-    private static DatagramPacket mPacket;
+    private  DatagramPacket mPacket;
     //UDP发送的地址
-    private static InetAddress mInetAddress;
+    private  InetAddress mInetAddress;
 
     /**
      * 发送网络数据
      *  @param
      */
-    public static void sendVoiceData(){
+    public  void sendVoiceData(){
         //将数据发送过去
         try {
+            Log.e("aaaaa", "sendVoiceData: mDatagramSocket=="+mDatagramSocket+"mPacket=="+mPacket );
             mDatagramSocket.send(mPacket);
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,7 +42,7 @@ public class UDPUtil {
     /**
      * 接收网络数据
      */
-    public static void getVoiceData(){
+    public  void getVoiceData(){
 
         //IOE Exception  接收数据
         try {
@@ -61,7 +65,7 @@ public class UDPUtil {
     /**
      * 初始化套接字
      */
-    public static void initSocket() throws IOException {
+    public  void initSocket() throws IOException {
         //根据不同的套接字来实现
         switch (SystemSettings.CAST_TYPE) {
             case BROADCAST_ADDRESS:// 广播
@@ -81,7 +85,7 @@ public class UDPUtil {
     }
 
     //释放Socket的资源
-    public static void releaseSocket() {
+    public  void releaseSocket() {
         if(mMultiSocket != null) {
             mMultiSocket = null;
         }
@@ -95,15 +99,15 @@ public class UDPUtil {
     /**
      * 打包发送数据
      */
-    public static void packSendData(byte [] mByteBuffer){
+    public  void packSendData(byte [] mByteBuffer){
         //准备发送的文件的信息
-        mPacket = new DatagramPacket(mByteBuffer, mByteBuffer.length, mInetAddress, SystemSettings.PORT);
+        mPacket = new DatagramPacket(mByteBuffer, mByteBuffer.length, mInetAddress, (int)SystemSettings.PORT_NUMBER);
     }
 
     /**
      * 打包接收数据
      */
-    public static void packReceiverData(byte [] mByteBuffer){
+    public  void packReceiverData(byte [] mByteBuffer){
         //准备发送的文件的信息
         mPacket = new DatagramPacket(mByteBuffer, mByteBuffer.length);
     }

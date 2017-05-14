@@ -9,6 +9,8 @@ import com.feicui.teach.walktalk.BaseActivity;
 import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.dialog.CodeRateDialog;
 import com.feicui.teach.walktalk.dialog.TalkTypeDialog;
+import com.feicui.teach.walktalk.utils.PreferencesManager;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,6 +39,8 @@ public class AudioSettingsActivity extends BaseActivity implements CodeRateDialo
     protected void initView() {
       mCbReView.setOnCheckedChangeListener(this);
       mCbUseSelf.setOnCheckedChangeListener(this);
+      mCbReView.setChecked(SystemSettings.IS_ECHO);
+      mCbUseSelf.setChecked(!SystemSettings.USE_SPEEX);
     }
 
     @OnClick(R.id.ll_audio_settings_code_rate)
@@ -47,7 +51,9 @@ public class AudioSettingsActivity extends BaseActivity implements CodeRateDialo
     }
 
     @Override
-    public void onCodeChooseResult(double choseCode) {
+    public void onCodeChooseResult(int choseIndex) {
+        SystemSettings.SPEEX_QUALITY=choseIndex;
+        PreferencesManager.getInstance(this).put(getResources().getString(R.string.speex_quality),choseIndex);
 
     }
 
@@ -55,18 +61,12 @@ public class AudioSettingsActivity extends BaseActivity implements CodeRateDialo
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
        switch (buttonView.getId()){
            case R.id.cb_audio_settings_use_review://回显
-               if(isChecked){
-                   //回显
-               }else{
-
-               }
+               SystemSettings.IS_ECHO=isChecked;
+               PreferencesManager.getInstance(this).put(getResources().getString(R.string.echo),isChecked);
                break;
            case R.id.cb_audio_settings_use_self_code://使用自身
-               if(isChecked){
-                   //使用自身
-               }else{
-
-               }
+               SystemSettings.USE_SPEEX=!isChecked;
+               PreferencesManager.getInstance(this).put(getResources().getString(R.string.use_speex),!isChecked);
                break;
        }
     }

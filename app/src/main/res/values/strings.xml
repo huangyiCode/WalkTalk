@@ -4,4 +4,39 @@
     <string name="start_talk">开启对讲</string>
     <string name="talk_type">对讲方式</string>
     <string name="aduio">音频</string>
+
+    <!--preference的key-->
+    <string name="use_speex">use_speex</string>
+    <string name="speex_quality">1</string>
+    <string name="echo">echo</string>
+    <string name="port">port</string>
+    <string name="broadcast_type">broadcast_type</string>
+
+    <!--初始化配置信息-->
+    <integer name="default_port">8888</integer>
+    <string name="default_broadcast_ip">255.255.255.255</string>
+    <string name="default_group_broadcast_ip">224.0.0.100</string>
+    <string name="default_single_broadcast_ip">192.168.0.1</string>
+
+
+    <!--Speex的品质的值 1 2 3 5 7 9 10-->
+    <string-array name="speex_quality_values">
+        <item>7</item>
+        <item>6</item>
+        <item>5</item>
+        <item>4</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+    <!--Speex的品质-->
+    <string-array name="speex_quality">
+        <item>24.6 kbps</item>
+        <item>18.2 kbps</item>
+        <item>15.0 kbps</item>
+        <item>11.0 kbps</item>
+        <item>8.00 kbps</item>
+        <item>5.95 kbps</item>
+        <item>3.95 kbps</item>
+    </string-array>
 </resources>

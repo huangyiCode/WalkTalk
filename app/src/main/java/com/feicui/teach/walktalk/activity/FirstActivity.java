@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import com.feicui.teach.walktalk.BaseActivity;
 import com.feicui.teach.walktalk.R;
+import com.feicui.teach.walktalk.utils.BroadCastType;
+import com.feicui.teach.walktalk.utils.PreferencesManager;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.OnClick;
 
@@ -36,6 +39,33 @@ public class FirstActivity extends BaseActivity{
             }
         }
 
+
+
+        initConfigParams();
+
+
+    }
+
+    /**
+     * 此处需要进行数据初始化  SystemSettings 数据存储在SharedPreference
+     */
+    public void initConfigParams(){
+        //端口号
+        SystemSettings.PORT_NUMBER=PreferencesManager.getInstance(this).get(getResources().getString(R.string.port),getResources().getInteger(R.integer.default_port));
+        //使用的广播类型
+        SystemSettings.CAST_TYPE= BroadCastType.values()[PreferencesManager.getInstance(this).get(getResources().getString(R.string.broadcast_type),0)];
+        //广播地址
+        SystemSettings.BROADCAST_IP=PreferencesManager.getInstance(this).get(BroadCastType.BROADCAST_ADDRESS.name(),getResources().getString(R.string.default_broadcast_ip));
+        //组播地址
+        SystemSettings.MULTICAST_IP=PreferencesManager.getInstance(this).get(BroadCastType.BROADCAST_GROUP_ADDRESS.name(),getResources().getString(R.string.default_group_broadcast_ip));
+        //广播地址
+        SystemSettings.UNICAST_IP=PreferencesManager.getInstance(this).get(BroadCastType.BROADCAST_SINGLE_ADDRESS.name(),getResources().getString(R.string.default_single_broadcast_ip));
+        //是否使用Speex解码
+        SystemSettings.USE_SPEEX=PreferencesManager.getInstance(this).get(getResources().getString(R.string.use_speex),false);
+        //Speex的品质
+        SystemSettings.SPEEX_QUALITY=PreferencesManager.getInstance(this).get(getResources().getString(R.string.speex_quality),getResources().getIntArray(R.array.speex_quality_values)[0]);
+        //是否回显
+        SystemSettings.IS_ECHO=PreferencesManager.getInstance(this).get(getResources().getString(R.string.echo),false);
     }
 
 

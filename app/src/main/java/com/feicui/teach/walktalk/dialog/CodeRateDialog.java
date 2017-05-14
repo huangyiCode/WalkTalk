@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.utils.Constant;
+import com.feicui.teach.walktalk.utils.PreferencesManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -44,21 +45,24 @@ public class CodeRateDialog extends BaseDialog implements CompoundButton.OnCheck
     }
 
     private void init() {
-        mSVContent.setVisibility(Constant.CODE_RATE.length>8? View.VISIBLE:View.GONE);
-        mLLContent.setVisibility(Constant.CODE_RATE.length<=8? View.VISIBLE:View.GONE);
-        mViewContent= Constant.CODE_RATE.length>8?mScrollContent:mLLContent;
+        mSVContent.setVisibility(mContext.getResources().getStringArray(R.array.speex_quality).length>8? View.VISIBLE:View.GONE);
+        mLLContent.setVisibility(mContext.getResources().getStringArray(R.array.speex_quality).length<=8? View.VISIBLE:View.GONE);
+        mViewContent= mContext.getResources().getStringArray(R.array.speex_quality).length>8?mScrollContent:mLLContent;
         setContent();
     }
 
     private void setContent(){
-        for (int i = 0; i <Constant.CODE_RATE.length ; i++) {
+        for (int i = 0; i <mContext.getResources().getStringArray(R.array.speex_quality).length ; i++) {
             View view=mInflate.inflate(R.layout.item_code_rate,null);
             mViewContent.addView(view);
             TextView mTvCode= (TextView) view.findViewById(R.id.tv_item_code_rate_code);
             CheckBox mCbCode= (CheckBox) view.findViewById(R.id.cb_item_code_rate_code);
-            mTvCode.setText(Constant.CODE_RATE[i]+"kbps");
-            Log.e("aaa", "setContent: "+Constant.CODE_RATE[i]);
+            mTvCode.setText(mContext.getResources().getStringArray(R.array.speex_quality)[i]+"kbps");
+            Log.e("aaa", "setContent: "+mContext.getResources().getStringArray(R.array.speex_quality)[i]);
             mCbCode.setOnCheckedChangeListener(this);
+            if(PreferencesManager.getInstance(mContext).get(mContext.getResources().getString(R.string.speex_quality),0)==i){
+                mCbCode.setChecked(true);
+            }
         }
     }
 
@@ -90,7 +94,7 @@ public class CodeRateDialog extends BaseDialog implements CompoundButton.OnCheck
                  for (int i = 0; i <mViewContent.getChildCount() ; i++) {
                      CheckBox box= (CheckBox) mViewContent.getChildAt(i).findViewById(R.id.cb_item_code_rate_code);
                      if(box.isChecked()){
-                         mOnCodeRateChooseResultListener.onCodeChooseResult(Constant.CODE_RATE[i]);
+                         mOnCodeRateChooseResultListener.onCodeChooseResult(i);
                         break;
                      }
                  }
@@ -110,7 +114,7 @@ public class CodeRateDialog extends BaseDialog implements CompoundButton.OnCheck
 
     public interface OnCodeRateChooseResultListener{
 
-        void onCodeChooseResult(double choseCode);
+        void onCodeChooseResult(int choseIndex);
 
     }
 }

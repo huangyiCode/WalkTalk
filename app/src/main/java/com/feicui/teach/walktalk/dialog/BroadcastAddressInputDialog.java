@@ -5,11 +5,13 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.utils.BroadCastType;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -54,6 +56,13 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
         mTeBroadcastAddress.addTextChangedListener(this);
         mTvBroadCaseType.setText(type.getTypeName()+"地址");;
         mTlBroadcastAddress.setHint(type.getTypeName()+"地址");
+        /**
+         * 默认显示之前保存的地址
+         */
+        mTeBroadcastAddress.setText(type.getTypeAddress());
+        mTeBroadcastAddress.setSelection(mTeBroadcastAddress.getText().length());
+
+
     }
 
     @OnClick({R.id.btn_broadcast_address_cancel,R.id.btn_broadcast_address_sure})
@@ -63,7 +72,7 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
                 cancel();
                 break;
             case R.id.btn_broadcast_address_sure://确定
-               if(mOnBroadcastInputDialogFinishResultListener!=null&&mTlBroadcastAddress.getError().length()==0&&mTeBroadcastAddress.getText().length()>0){
+               if(mOnBroadcastInputDialogFinishResultListener!=null&&mTlBroadcastAddress.getError()==null&&mTeBroadcastAddress.getText().length()>0){
                  mOnBroadcastInputDialogFinishResultListener.onBroadcastInputResult(mTeBroadcastAddress.getText().toString(),type);
                    cancel();
                }
@@ -97,7 +106,7 @@ public class BroadcastAddressInputDialog extends BaseDialog implements TextWatch
     public void afterTextChanged(Editable s) {
       if(s.length()>0){
          if(true){//格式判断
-             mTlBroadcastAddress.setError("");
+             mTlBroadcastAddress.setError(null);
          }else{
              mTlBroadcastAddress.setError(type.getTypeName()+"格式不正确");
          }

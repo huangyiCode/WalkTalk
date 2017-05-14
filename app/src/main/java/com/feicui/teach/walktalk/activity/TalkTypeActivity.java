@@ -9,6 +9,8 @@ import com.feicui.teach.walktalk.dialog.BroadcastAddressInputDialog;
 import com.feicui.teach.walktalk.dialog.PortDialog;
 import com.feicui.teach.walktalk.dialog.TalkTypeDialog;
 import com.feicui.teach.walktalk.utils.BroadCastType;
+import com.feicui.teach.walktalk.utils.PreferencesManager;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.OnClick;
 
@@ -66,7 +68,8 @@ public class TalkTypeActivity extends BaseActivity implements TalkTypeDialog.OnT
      */
     @Override
     public void onTalkTypeResult(int index) {
-
+        PreferencesManager.getInstance(this).put(getResources().getString(R.string.broadcast_type),index);
+        SystemSettings.CAST_TYPE=BroadCastType.values()[index];
     }
 
     /**
@@ -75,7 +78,8 @@ public class TalkTypeActivity extends BaseActivity implements TalkTypeDialog.OnT
      */
     @Override
     public void onPortResult(int port) {
-
+       SystemSettings.PORT_NUMBER=port;
+        PreferencesManager.getInstance(this).put(getResources().getString(R.string.port),port);
     }
 
     /**
@@ -85,6 +89,17 @@ public class TalkTypeActivity extends BaseActivity implements TalkTypeDialog.OnT
      */
     @Override
     public void onBroadcastInputResult(String address,BroadCastType type) {
-
+       switch (type){
+           case BROADCAST_ADDRESS://广播
+               SystemSettings.BROADCAST_IP=address;
+               break;
+           case BROADCAST_GROUP_ADDRESS://组播
+               SystemSettings.MULTICAST_IP=address;
+               break;
+           case BROADCAST_SINGLE_ADDRESS://单播
+               SystemSettings.UNICAST_IP=address;
+               break;
+       }
+        PreferencesManager.getInstance(this).put(type.name(),address);
     }
 }

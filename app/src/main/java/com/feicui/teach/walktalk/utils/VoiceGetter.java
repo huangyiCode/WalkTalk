@@ -28,6 +28,8 @@ public class VoiceGetter extends Thread {
      */
     private  boolean isStop;
 
+    UDPUtil udp;
+
 
     /**
      * 开始录音
@@ -42,7 +44,8 @@ public class VoiceGetter extends Thread {
          * 初始化Socket
          */
         try {
-            UDPUtil.initSocket();
+            udp=new UDPUtil();
+            udp.initSocket();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,7 +54,7 @@ public class VoiceGetter extends Thread {
          * 初始化缓存数据
          */
         if (SystemSettings.USE_SPEEX) {//Speex
-
+            mBuffer = new byte[320];
         } else {//系统
             mBuffer = new byte[320];
 
@@ -61,7 +64,7 @@ public class VoiceGetter extends Thread {
         /**
          * 封装数据包
          */
-        UDPUtil.packSendData(mBuffer);
+        udp.packSendData(mBuffer);
 
 
         /**
@@ -74,7 +77,7 @@ public class VoiceGetter extends Thread {
              */
             int len = 0;
             if (SystemSettings.USE_SPEEX) {//Speex
-
+                len = mAudioRecord.read(mBuffer, 0, 320);
             } else {//系统
                 len = mAudioRecord.read(mBuffer, 0, 320);
             }
@@ -83,7 +86,7 @@ public class VoiceGetter extends Thread {
              * 读取到录音结果之后需要将声音使用UDP进行传输
              */
 
-            UDPUtil.sendVoiceData();
+            udp.sendVoiceData();
         }
     }
 
@@ -108,10 +111,11 @@ public class VoiceGetter extends Thread {
      * 释放资源
      */
     private void releaseAudioRecord(){
-        //关闭Socket
-        UDPUtil.releaseSocket();
+
         //关闭录音机器
         mAudioRecord.release();
+        //关闭Socket
+        udp.releaseSocket();
 
     }
 

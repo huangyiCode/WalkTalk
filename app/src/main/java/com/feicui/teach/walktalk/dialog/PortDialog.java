@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.feicui.teach.walktalk.R;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -30,6 +31,8 @@ public class PortDialog extends BaseDialog implements TextWatcher {
     }
 
     public void init(){
+        mTePort.setText(SystemSettings.PORT_NUMBER+"");
+        mTePort.setSelection(mTePort.getText().length());
         mTePort.addTextChangedListener(this);
     }
 
@@ -40,7 +43,7 @@ public class PortDialog extends BaseDialog implements TextWatcher {
                 cancel();
                 break;
             case R.id.btn_port_sure://确定
-                if(mOnPortDialogFinishResultListener!=null&&mTePort.getText().length()>0&&mTlPort.getError().length()==0){
+                if(mOnPortDialogFinishResultListener!=null&&mTePort.getText().length()>0&&mTlPort.getError()==null){
                     int port=Integer.parseInt(mTePort.getText().toString());
                     mOnPortDialogFinishResultListener.onPortResult(port);
                     cancel();
@@ -68,7 +71,7 @@ public class PortDialog extends BaseDialog implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        mTlPort.setError(s.length()>0?"":"请输入正确的端口号");
+        mTlPort.setError(s.length()>0?null:"请输入正确的端口号");
     }
 
     /**

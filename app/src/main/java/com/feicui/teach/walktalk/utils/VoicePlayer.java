@@ -26,6 +26,8 @@ public class VoicePlayer extends Thread {
      */
     private boolean isStopReceiver;
 
+    UDPUtil udp;
+
 
     /**
      * 播放录音数据
@@ -35,7 +37,8 @@ public class VoicePlayer extends Thread {
          * 初始化Socket
          */
         try {
-            UDPUtil.initSocket();
+             udp=new UDPUtil();
+            udp.initSocket();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,23 +55,23 @@ public class VoicePlayer extends Thread {
          */
         byte[] byteBuffer=null;
         if(SystemSettings.USE_SPEEX) {
-
+            byteBuffer = new byte[320];
 
         } else {
             byteBuffer = new byte[320];
         }
 
-        UDPUtil.packReceiverData(byteBuffer);
+        udp.packReceiverData(byteBuffer);
 
         /**
          * 循环接使用UDP接收信息并且播放
          */
         while(!isStopReceiver) {
 
-            UDPUtil.getVoiceData();
+            udp.getVoiceData();
             //用AudioTrack来播放声音
             if (SystemSettings.USE_SPEEX) {
-
+                mAudioTrack.write(byteBuffer, 0, 320);
 
             } else {
                 mAudioTrack.write(byteBuffer, 0, 320);
@@ -89,13 +92,16 @@ public class VoicePlayer extends Thread {
      * 回收播放器
      */
     public  void releaseAudioTrack(){
+
         if(mAudioTrack != null) {
             if(mAudioTrack.getPlayState() != AudioTrack.PLAYSTATE_STOPPED) {
                 mAudioTrack.stop();
             }
-            mAudioTrack.release();
-            mAudioTrack = null;
+
         }
+        mAudioTrack.release();
+        mAudioTrack = null;
+        udp.releaseSocket();
     }
 
 

@@ -15,20 +15,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_marginTop="@dimen/margin_left"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginRight="@dimen/margin_left"
+            android:textSize="@dimen/text_size_medium"
+            android:textColor="@color/colorPrimary"
+            android:text="对讲类型"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <RadioGroup
             android:id="@+id/rg__dialog_talk_type"
             android:orientation="vertical"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TextView
-                android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/colorPrimary"
-                android:text="对讲类型"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <RadioButton
                 android:button="@null"
                 android:id="@+id/rb_dialog_talk_type_first"

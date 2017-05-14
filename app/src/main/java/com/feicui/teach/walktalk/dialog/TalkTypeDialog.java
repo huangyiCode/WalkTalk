@@ -7,6 +7,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.feicui.teach.walktalk.R;
+import com.feicui.teach.walktalk.utils.BroadCastType;
+import com.feicui.teach.walktalk.utils.SystemSettings;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,6 +34,12 @@ public class TalkTypeDialog extends BaseDialog {
 
     public void init() {
         mRadioFirst.setChecked(true);
+        for (int i = 0; i < BroadCastType.values().length; i++) {
+            if(SystemSettings.CAST_TYPE==BroadCastType.values()[i]){
+                RadioButton button= (RadioButton) mRadioGroup.getChildAt(i);
+                button.setChecked(true);
+            }
+        }
     }
 
 
