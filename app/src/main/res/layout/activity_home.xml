@@ -8,10 +8,78 @@
     tools:context="com.feicui.teach.walktalk.activity.HomeActivity">
 
     <LinearLayout
+        android:orientation="vertical"
         android:background="#f0eff5"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
+
+        <LinearLayout
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <TextView
+                android:text="本机IP地址:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_home_current_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <TextView
+                android:text="端口号:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_home_current_port"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <TextView
+                android:text="通话方式:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_home_talk_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="@dimen/margin_left"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+            <TextView
+                android:text="目标IP:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_home_point_ip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/ll_home_record"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
 
     </LinearLayout>
 

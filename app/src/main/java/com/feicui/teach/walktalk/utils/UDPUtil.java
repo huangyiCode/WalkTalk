@@ -1,12 +1,15 @@
 package com.feicui.teach.walktalk.utils;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 /**
  * Created by Administrator on 2017/5/14 0014.
@@ -32,8 +35,10 @@ public class UDPUtil {
     public  void sendVoiceData(){
         //将数据发送过去
         try {
-            Log.e("aaaaa", "sendVoiceData: mDatagramSocket=="+mDatagramSocket+"mPacket=="+mPacket );
-            mDatagramSocket.send(mPacket);
+//            Log.e("aaaaa", "sendVoiceData: mDatagramSocket=="+mDatagramSocket+"mPacket=="+mPacket );
+           if(mDatagramSocket!=null){
+               mDatagramSocket.send(mPacket);
+           }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -46,9 +51,12 @@ public class UDPUtil {
 
         //IOE Exception  接收数据
         try {
+            Log.e("aaa", "getVoiceData: "+"等待接收数据+本地址"+CommUtils.getLocalIP()+"---"+CommUtils.getLocalPort() );
             mDatagramSocket.receive(mPacket);
+            Log.e("aaa", "getVoiceData: "+"等待接收数据-----" );
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e("aaa", "getVoiceData: "+"等待接收数据----异常" );
         }
 
 //        //用AudioTrack来播放声音
@@ -84,6 +92,29 @@ public class UDPUtil {
         mDatagramSocket.setSoTimeout(0);
     }
 
+    /**
+     * 几接收数据的UDP
+     */
+    public void initSocketReceiverData() throws IOException {
+        switch (SystemSettings.CAST_TYPE) {
+            case BROADCAST_ADDRESS: // 广播
+                mInetAddress = InetAddress.getByName(SystemSettings.BROADCAST_IP);
+                mDatagramSocket = new DatagramSocket((int) SystemSettings.PORT_NUMBER);
+                break;
+            case BROADCAST_GROUP_ADDRESS: // 组播
+                mInetAddress = InetAddress.getByName(SystemSettings.MULTICAST_IP);
+                mMultiSocket = new MulticastSocket((int) SystemSettings.PORT_NUMBER);
+                mMultiSocket.joinGroup(mInetAddress);
+                mDatagramSocket = mMultiSocket;
+                break;
+            case BROADCAST_SINGLE_ADDRESS: // 单播
+                mInetAddress = InetAddress.getByName(SystemSettings.UNICAST_IP);
+                mDatagramSocket = new DatagramSocket((int) SystemSettings.PORT_NUMBER);
+                break;
+        }
+        mDatagramSocket.setSoTimeout(0);
+    }
+
     //释放Socket的资源
     public  void releaseSocket() {
         if(mMultiSocket != null) {
@@ -108,7 +139,7 @@ public class UDPUtil {
      * 打包接收数据
      */
     public  void packReceiverData(byte [] mByteBuffer){
-        //准备发送的文件的信息
+        //准备接受的文件的信息
         mPacket = new DatagramPacket(mByteBuffer, mByteBuffer.length);
     }
 

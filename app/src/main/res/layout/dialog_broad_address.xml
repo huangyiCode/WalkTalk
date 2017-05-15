@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content">
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/te_broadcast_address_input"
-                    android:maxLength="15"
+                    android:maxLength="30"
                     android:inputType="text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

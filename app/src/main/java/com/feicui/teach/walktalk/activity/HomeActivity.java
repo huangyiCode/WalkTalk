@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.feicui.teach.walktalk.BaseActivity;
 import com.feicui.teach.walktalk.R;
 import com.feicui.teach.walktalk.dialog.BaseDialog;
 import com.feicui.teach.walktalk.dialog.SpeakingDialog;
+import com.feicui.teach.walktalk.utils.CommUtils;
+import com.feicui.teach.walktalk.utils.SystemSettings;
+import com.feicui.teach.walktalk.utils.VoiceFilter;
 import com.feicui.teach.walktalk.utils.VoiceGetter;
 import com.feicui.teach.walktalk.utils.VoicePlayer;
 
@@ -29,6 +33,18 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
 
     @BindView(R.id.btn_home_stop_talk)
     Button mBtnStopTalk;
+
+    @BindView(R.id.tv_home_current_ip)
+    TextView mTvIpString;
+
+    @BindView(R.id.tv_home_current_port)
+    TextView mTvPortString;
+
+    @BindView(R.id.tv_home_point_ip)
+     TextView mTvPointIp;
+
+    @BindView(R.id.tv_home_talk_type)
+     TextView mTvTalkType;
 
     /**
      * 通话中
@@ -131,8 +147,20 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
         /**
          * 开始接收别人传递过来的数据信息
          */
-        mVoicePlayer=new VoicePlayer();
+        mVoicePlayer=new VoicePlayer(this);
         mVoicePlayer.start();
+        refreshIPInfo();
+    }
+
+
+    /**
+     * 刷新Ip信息
+     */
+    public void  refreshIPInfo(){
+        mTvIpString.setText(CommUtils.getLocalIP());
+        mTvPortString.setText(SystemSettings.PORT_NUMBER+"");
+        mTvTalkType.setText(SystemSettings.CAST_TYPE.getTypeName());
+        mTvPointIp.setText(SystemSettings.CAST_TYPE.getTypeAddress());
     }
 
     @Override

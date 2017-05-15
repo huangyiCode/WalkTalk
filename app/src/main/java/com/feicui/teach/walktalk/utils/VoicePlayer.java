@@ -1,10 +1,12 @@
 package com.feicui.teach.walktalk.utils;
 
+import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.Process;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -28,6 +30,12 @@ public class VoicePlayer extends Thread {
 
     UDPUtil udp;
 
+    Context mContext;
+
+    public VoicePlayer(Context context){
+        mContext=context;
+    }
+
 
     /**
      * 播放录音数据
@@ -38,7 +46,7 @@ public class VoicePlayer extends Thread {
          */
         try {
              udp=new UDPUtil();
-            udp.initSocket();
+            udp.initSocketReceiverData();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,6 +71,9 @@ public class VoicePlayer extends Thread {
 
         udp.packReceiverData(byteBuffer);
 
+        Log.e("aaaa", "mAudioTrack=="+"执行run方法"+isStopReceiver );
+
+
         /**
          * 循环接使用UDP接收信息并且播放
          */
@@ -70,12 +81,18 @@ public class VoicePlayer extends Thread {
 
             udp.getVoiceData();
             //用AudioTrack来播放声音
-            if (SystemSettings.USE_SPEEX) {
-                mAudioTrack.write(byteBuffer, 0, 320);
-
-            } else {
-                mAudioTrack.write(byteBuffer, 0, 320);
+            Log.e("aaaa", "mAudioTrack=="+mAudioTrack );
+//            Toast.makeText(mContext, "--接收到信息--", Toast.LENGTH_SHORT).show();
+            if(mAudioTrack!=null){//防止线程安全问题
+                if (SystemSettings.USE_SPEEX) {
+                    mAudioTrack.write(byteBuffer, 0, 320);
+                } else {
+                    Log.e("aaaa", "playAudio: mAudioTrack="+mAudioTrack+"isStopReceiver="+isStopReceiver );
+                    Log.e("bbbbb", "playAudio: "+byteBuffer );
+                    mAudioTrack.write(byteBuffer, 0, 320);
+                }
             }
+
         }
     }
 
