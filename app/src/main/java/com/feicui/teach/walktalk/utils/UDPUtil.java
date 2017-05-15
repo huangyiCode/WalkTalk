@@ -24,7 +24,7 @@ public class UDPUtil {
     //组播的套接字
     private  MulticastSocket mMultiSocket;
     //数据包
-    private  DatagramPacket mPacket;
+    public   DatagramPacket mPacket;
     //UDP发送的地址
     private  InetAddress mInetAddress;
 
@@ -51,21 +51,14 @@ public class UDPUtil {
 
         //IOE Exception  接收数据
         try {
-            Log.e("aaa", "getVoiceData: "+"等待接收数据+本地址"+CommUtils.getLocalIP()+"---"+CommUtils.getLocalPort() );
+            Log.e("aaa", "mDatagramSocket="+mDatagramSocket+"mPacket=="+mPacket);
+
             mDatagramSocket.receive(mPacket);
             Log.e("aaa", "getVoiceData: "+"等待接收数据-----" );
         } catch (IOException e) {
             e.printStackTrace();
             Log.e("aaa", "getVoiceData: "+"等待接收数据----异常" );
         }
-
-//        //用AudioTrack来播放声音
-//        if(SystemSettings.USE_SPEEX) {
-////            Speex.decode(byteBuffer, byteBuffer.length, shortBuffer);
-////            mAudioTrack.write(shortBuffer, 0, 160);
-//        } else {
-//            mAudioTrack.write(byteBuffer, 0, 320);
-//        }
 
 
     }
@@ -93,7 +86,7 @@ public class UDPUtil {
     }
 
     /**
-     * 几接收数据的UDP
+     * 接收数据的UDP
      */
     public void initSocketReceiverData() throws IOException {
         switch (SystemSettings.CAST_TYPE) {
@@ -112,6 +105,7 @@ public class UDPUtil {
                 mDatagramSocket = new DatagramSocket((int) SystemSettings.PORT_NUMBER);
                 break;
         }
+        Log.e("aaaa", "initSocketReceiverData: "+mDatagramSocket);
         mDatagramSocket.setSoTimeout(0);
     }
 
@@ -125,6 +119,8 @@ public class UDPUtil {
             mDatagramSocket.close();
             mDatagramSocket = null;
         }
+
+
     }
 
     /**
@@ -141,6 +137,28 @@ public class UDPUtil {
     public  void packReceiverData(byte [] mByteBuffer){
         //准备接受的文件的信息
         mPacket = new DatagramPacket(mByteBuffer, mByteBuffer.length);
+    }
+
+
+    /**
+     * Socket异常退出
+     */
+    public void socketErrorFinish(){
+        if(mMultiSocket != null) {
+        try {
+            Log.e("aaaa", "playAudio: +level之前=="+mInetAddress);
+            mMultiSocket.leaveGroup(mInetAddress);
+            Log.e("aaaa", "playAudio: +level之后=="+mInetAddress);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mMultiSocket = null;
+    }
+        if(mDatagramSocket != null) {
+            mDatagramSocket.close();
+            mDatagramSocket = null;
+        }
+
     }
 
 

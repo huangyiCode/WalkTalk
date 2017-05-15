@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import codecs.Speex;
 
 public class HomeActivity extends BaseActivity implements View.OnTouchListener {
 
@@ -45,6 +47,9 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
 
     @BindView(R.id.tv_home_talk_type)
      TextView mTvTalkType;
+
+    @BindView(R.id.ll_home_record)
+    LinearLayout mLLRecord;
 
     /**
      * 通话中
@@ -174,5 +179,15 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
             mVoicePlayer.finishVoicePlayer();
             mVoicePlayer = null;
         }
+        //关闭解码
+//        Speex.close();
+    }
+
+
+    /**
+     * 添加语音回放记录  (本地)
+     */
+    public void addAudioRecord(){
+
     }
 }

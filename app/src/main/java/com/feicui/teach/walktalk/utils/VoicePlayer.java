@@ -11,6 +11,8 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.net.DatagramPacket;
 
+import codecs.Speex;
+
 /**
  * Created by Administrator on 2017/5/14 0014.
  * 声音播放
@@ -32,6 +34,8 @@ public class VoicePlayer extends Thread {
 
     Context mContext;
 
+    private short[] shortBuffer = new short[' '];
+
     public VoicePlayer(Context context){
         mContext=context;
     }
@@ -41,6 +45,11 @@ public class VoicePlayer extends Thread {
      * 播放录音数据
      */
     public void playAudio(){
+
+        /**
+         *初始化播放器
+         */
+        initAudioTrack();
         /**
          * 初始化Socket
          */
@@ -51,10 +60,7 @@ public class VoicePlayer extends Thread {
             e.printStackTrace();
         }
 
-        /**
-         *初始化播放器
-         */
-        initAudioTrack();
+
 
         // 刷新过滤列表, 本机IP可能改变
         VoiceFilter.refreshFilterList();
@@ -63,11 +69,12 @@ public class VoicePlayer extends Thread {
          */
         byte[] byteBuffer=null;
         if(SystemSettings.USE_SPEEX) {
-            byteBuffer = new byte[320];
+            byteBuffer = new byte[Speex.getCompressionValue(SystemSettings.SPEEX_QUALITY)];
 
         } else {
             byteBuffer = new byte[320];
         }
+
 
         udp.packReceiverData(byteBuffer);
 
@@ -75,7 +82,7 @@ public class VoicePlayer extends Thread {
 
 
         /**
-         * 循环接使用UDP接收信息并且播放
+         * 循环使用UDP接收信息并且播放
          */
         while(!isStopReceiver) {
 
@@ -83,17 +90,25 @@ public class VoicePlayer extends Thread {
             //用AudioTrack来播放声音
             Log.e("aaaa", "mAudioTrack=="+mAudioTrack );
 //            Toast.makeText(mContext, "--接收到信息--", Toast.LENGTH_SHORT).show();
-            if(mAudioTrack!=null){//防止线程安全问题
+            //如果设置为回放
+            Log.e("aaaa", "playAudio: +udp=="+udp+"mPacket=="+udp.mPacket.getAddress());
+//            if(!SystemSettings.IS_ECHO &&udp.mPacket.getAddress()!=null&& VoiceFilter.isInFilterList(udp.mPacket.getAddress().getHostAddress())) {
+//                continue;
+//            }
+
+//            if(mAudioTrack!=null){//防止线程安全问题
                 if (SystemSettings.USE_SPEEX) {
-                    mAudioTrack.write(byteBuffer, 0, 320);
+                    Speex.decode(byteBuffer, byteBuffer.length, shortBuffer);
+                    mAudioTrack.write(shortBuffer, 0, 160);
                 } else {
                     Log.e("aaaa", "playAudio: mAudioTrack="+mAudioTrack+"isStopReceiver="+isStopReceiver );
                     Log.e("bbbbb", "playAudio: "+byteBuffer );
                     mAudioTrack.write(byteBuffer, 0, 320);
                 }
             }
+        releaseAudioTrack();
 
-        }
+//        }
     }
 
 
@@ -110,6 +125,7 @@ public class VoicePlayer extends Thread {
      */
     public  void releaseAudioTrack(){
 
+        udp.socketErrorFinish();
         if(mAudioTrack != null) {
             if(mAudioTrack.getPlayState() != AudioTrack.PLAYSTATE_STOPPED) {
                 mAudioTrack.stop();
@@ -118,7 +134,7 @@ public class VoicePlayer extends Thread {
         }
         mAudioTrack.release();
         mAudioTrack = null;
-        udp.releaseSocket();
+
     }
 
 
@@ -136,7 +152,7 @@ public class VoicePlayer extends Thread {
      */
     public  void finishVoicePlayer(){
         isStopReceiver=true;
-        releaseAudioTrack();
+        udp.socketErrorFinish();
     }
 
 
