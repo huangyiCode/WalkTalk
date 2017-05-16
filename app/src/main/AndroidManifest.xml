@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.feicui.teach.walktalk">
+    package="com.zhaoerdragon.sockettell">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <!-- 首页 -->
-        <activity android:name=".activity.FirstActivity">
+        <activity android:name="com.feicui.teach.sockettell.activity.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,13 +25,13 @@
         </activity>
 
         <!-- 主界面 -->
-        <activity android:name=".activity.HomeActivity" />
+        <activity android:name="com.feicui.teach.sockettell.activity.HomeActivity" />
         <!-- 音频设置 -->
-        <activity android:name=".activity.AudioSettingsActivity" />
+        <activity android:name="com.feicui.teach.sockettell.activity.AudioSettingsActivity" />
         <!-- 通话方式 -->
-        <activity android:name=".activity.TalkTypeActivity" />
+        <activity android:name="com.feicui.teach.sockettell.activity.TalkTypeActivity" />
         <!--使用说明-->
-        <activity android:name=".activity.UseInfoActivity"></activity>
+        <activity android:name="com.feicui.teach.sockettell.activity.UseInfoActivity"></activity>
     </application>
 
 </manifest>

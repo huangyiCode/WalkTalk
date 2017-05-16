@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.feicui.teach.walktalk.activity.TalkTypeActivity">
+    tools:context="com.feicui.teach.sockettell.activity.TalkTypeActivity">
 
     <TextView
         android:gravity="bottom"
