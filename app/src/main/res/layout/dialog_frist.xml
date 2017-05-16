@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/gray_128"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+      <LinearLayout
+          android:layout_marginRight="@dimen/margin_left"
+          android:layout_marginLeft="@dimen/margin_left"
+          android:gravity="center"
+          android:layout_weight="1"
+          android:orientation="horizontal"
+          android:layout_width="match_parent"
+          android:layout_height="0dp">
+          <ImageView
+              android:src="@drawable/ic_phonelink_lock_black_24dp"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" />
+          <TextView
+              android:layout_marginLeft="@dimen/margin_left"
+              android:textColor="#000000"
+              android:textSize="@dimen/text_size_xlarge"
+              android:text="WalkTalk需要获得以下权限,才可正常使用"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content" />
+      </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <ImageView
+                    android:src="@drawable/ic_folder_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginRight="@dimen/margin_left"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textColor="#000000"
+                        android:gravity="center_vertical"
+                        android:text="录音"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"></TextView>
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:text="对讲需要使用系统录音器"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"></TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_left"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <ImageView
+                    android:src="@drawable/ic_folder_black_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_marginRight="@dimen/margin_left"
+                    android:layout_marginLeft="@dimen/margin_left"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textColor="#000000"
+                        android:gravity="center_vertical"
+                        android:text="存储空间"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"></TextView>
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:text="保存音频文件(后期提供回放功能)"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"></TextView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:background="@color/white"
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:text="下一步"
+            android:id="@+id/btn_first_goto"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

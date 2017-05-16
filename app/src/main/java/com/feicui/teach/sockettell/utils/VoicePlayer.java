@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
+import android.os.Build;
 import android.os.Process;
 import android.util.Log;
 
@@ -66,7 +67,7 @@ public class VoicePlayer extends Thread {
          * 初始化接收数据包
          */
         byte[] byteBuffer=null;
-        if(SystemSettings.USE_SPEEX) {
+        if(SystemSettings.USE_SPEEX&&(Build.CPU_ABI.equals("armeabi")||Build.CPU_ABI.equals("x86"))) {
             byteBuffer = new byte[Speex.getCompressionValue(SystemSettings.SPEEX_QUALITY)];
 
         } else {
@@ -105,7 +106,7 @@ public class VoicePlayer extends Thread {
 
 
 //            if(mAudioTrack!=null){//防止线程安全问题
-                if (SystemSettings.USE_SPEEX) {
+                if (SystemSettings.USE_SPEEX&&(Build.CPU_ABI.equals("armeabi")||Build.CPU_ABI.equals("x86"))) {
                     Speex.decode(byteBuffer, byteBuffer.length, shortBuffer);
                     mAudioTrack.write(shortBuffer, 0, 160);
                 } else {
@@ -115,8 +116,8 @@ public class VoicePlayer extends Thread {
                     Log.e("aaaa", "playAudio: 读取完毕" );
                 }
             }
-        Log.e("aaa", "playAudio: "+"循环结束" );
-        releaseAudioTrack();
+                Log.e("aaa", "playAudio: "+"循环结束" );
+                releaseAudioTrack();
 
 //        }
     }

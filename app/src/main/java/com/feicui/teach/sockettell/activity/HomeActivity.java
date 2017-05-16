@@ -1,7 +1,9 @@
 package com.feicui.teach.sockettell.activity;
 
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -169,8 +171,11 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
             mVoicePlayer.finishVoicePlayer();
             mVoicePlayer = null;
         }
+        Log.e("aaa", "CPU架构:"+Build.CPU_ABI );
         //关闭解码
-        Speex.close();
+        if(Build.CPU_ABI.equals("armeabi")||Build.CPU_ABI.equals("x86")){
+           Speex.close();
+        }
     }
 
 

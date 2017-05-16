@@ -3,6 +3,7 @@ package com.feicui.teach.sockettell.utils;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Process;
 import java.io.IOException;
 
@@ -53,7 +54,7 @@ public class VoiceGetter extends Thread {
         /**
          * 初始化缓存数据
          */
-        if (SystemSettings.USE_SPEEX) {//Speex
+        if (SystemSettings.USE_SPEEX&&(Build.CPU_ABI.equals("armeabi")||Build.CPU_ABI.equals("x86"))) {//Speex
             mBuffer = new byte[Speex.getCompressionValue(SystemSettings.SPEEX_QUALITY)];
         } else {//系统
             mBuffer = new byte[320];
@@ -76,7 +77,7 @@ public class VoiceGetter extends Thread {
              *   读取录音信息
              */
             int len = 0;
-            if (SystemSettings.USE_SPEEX) {//Speex
+            if (SystemSettings.USE_SPEEX&&(Build.CPU_ABI.equals("armeabi")||Build.CPU_ABI.equals("x86"))) {//Speex
                 //读取录音器的数据到mShortBuffer中
                 mAudioRecord.read(mShortBuffer, 0, 160);
                 //将mShortBuffer中的数据进行编码，便于发送
