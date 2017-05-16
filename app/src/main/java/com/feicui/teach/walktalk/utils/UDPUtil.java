@@ -53,7 +53,9 @@ public class UDPUtil {
         try {
             Log.e("aaa", "mDatagramSocket="+mDatagramSocket+"mPacket=="+mPacket);
 
-            mDatagramSocket.receive(mPacket);
+            if(mDatagramSocket!=null){
+                mDatagramSocket.receive(mPacket);
+            }
             Log.e("aaa", "getVoiceData: "+"等待接收数据-----" );
         } catch (IOException e) {
             e.printStackTrace();

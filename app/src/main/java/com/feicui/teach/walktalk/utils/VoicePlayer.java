@@ -92,9 +92,19 @@ public class VoicePlayer extends Thread {
 //            Toast.makeText(mContext, "--接收到信息--", Toast.LENGTH_SHORT).show();
             //如果设置为回放
             Log.e("aaaa", "playAudio: +udp=="+udp+"mPacket=="+udp.mPacket.getAddress());
-//            if(!SystemSettings.IS_ECHO &&udp.mPacket.getAddress()!=null&& VoiceFilter.isInFilterList(udp.mPacket.getAddress().getHostAddress())) {
-//                continue;
-//            }
+            //如果设置为回放  默认false    不回放&&接收数据的IP已经发送过----->不播放
+            /**
+             * 去除回音
+             */
+            if(udp.mPacket.getAddress()!=null){
+                Log.e("aaaa", "playAudio: 接收到数据的来源地址----"+udp.mPacket.getAddress() );
+                if(!SystemSettings.IS_ECHO &&udp.mPacket.getAddress()!=null&& VoiceFilter.isInFilterList(udp.mPacket.getAddress().getHostAddress())) {
+                    continue;
+                }
+            }
+
+
+
 
 //            if(mAudioTrack!=null){//防止线程安全问题
                 if (SystemSettings.USE_SPEEX) {
