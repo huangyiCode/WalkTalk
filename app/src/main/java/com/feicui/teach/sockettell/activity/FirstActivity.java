@@ -79,7 +79,7 @@ public class FirstActivity extends BaseActivity implements FirstDialog.OnFirstDi
      * 跳转
      */
     @OnClick(R.id.btn_home_start) void gotoNext(){
-        openActivity(HomeActivity.class);
+        openActivity(LoginActivity.class);
         finish();
     }
 

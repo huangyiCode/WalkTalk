@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,12 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
     @BindView(R.id.ll_home_record)
     LinearLayout mLLRecord;
 
+    @BindView(R.id.iv_home_photo)
+    ImageView mIvPhoto;
+
+    @BindView(R.id.tv_home_name)
+    TextView mTvName;
+
     /**
      * 通话中
      */
@@ -62,13 +69,17 @@ public class HomeActivity extends BaseActivity implements View.OnTouchListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentViewWithDefaultTitle(R.layout.activity_home,"对讲机");
+        setContentViewWithDefaultTitle(R.layout.activity_home,"智能对讲机");
     }
 
     @Override
     protected void initView() {
         mTvTitleRight.setVisibility(View.VISIBLE);
         mTvTitleRight.setText("使用说明");
+        if(SystemSettings.BITMAP!=null){
+            mIvPhoto.setImageBitmap(SystemSettings.BITMAP);
+        }
+        mTvName.setText(SystemSettings.USER_NAME);
         /**
          * 初始化设置
          */

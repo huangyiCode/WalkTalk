@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@mipmap/login_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_marginBottom="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.feicui.teach.sockettell.view.CircleImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/iv_login_choose_pic"/>
+
+        <EditText
+            android:textColor="@color/white"
+            android:maxLength="6"
+            android:gravity="center"
+            android:textColorHint="@color/gray_224"
+            android:paddingLeft="@dimen/margin_left"
+            android:background="@drawable/select_det_focus"
+            android:layout_marginTop="20dp"
+            android:hint="昵称"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/edt_login_name" />
+        <Button
+            android:id="@+id/btn_login_login"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/white"
+            android:background="@drawable/sleect_login_btn"
+            android:text="下一步"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+    </LinearLayout>
+
+</LinearLayout>

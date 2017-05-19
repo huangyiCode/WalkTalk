@@ -9,7 +9,27 @@
     tools:context="com.feicui.teach.sockettell.activity.HomeActivity">
 
     <LinearLayout
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.feicui.teach.sockettell.view.CircleImageView
+            android:id="@+id/iv_home_photo"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/tv_home_name"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <LinearLayout
         android:orientation="vertical"
         android:background="#f0eff5"
         android:layout_weight="1"

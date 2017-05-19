@@ -1,5 +1,7 @@
 package com.feicui.teach.sockettell.utils;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Administrator on 2017/5/14 0014.
  * 用户的一些设置
@@ -46,6 +48,16 @@ public class SystemSettings {
      * 端口号
      */
     public static long PORT_NUMBER;
+
+    /**
+     * 用户头像
+     */
+    public  static Bitmap BITMAP;
+
+    /**
+     * 用户昵称
+     */
+    public static String USER_NAME="NAME";
 
 
 
