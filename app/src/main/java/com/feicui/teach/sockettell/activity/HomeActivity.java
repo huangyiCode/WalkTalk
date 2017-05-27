@@ -33,8 +33,6 @@ import com.zhaoerdragon.sockettell.R;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import edu.zx.slidingmenu.SlidingMenu;
-
 import org.lansir.ip.codecs.Speex;
 
 import java.io.File;

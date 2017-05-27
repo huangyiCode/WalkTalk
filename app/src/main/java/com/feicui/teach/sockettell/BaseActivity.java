@@ -116,6 +116,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
     }
 
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        ButterKnife.bind(this);
+        initView();
+    }
+
 
     /**
      * 不需要为返回键设置监听，默认为finish当前activity

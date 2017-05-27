@@ -23,7 +23,7 @@
         android:theme="@style/AppTheme">
 
         <!-- 首页 -->
-        <activity android:name="com.feicui.teach.sockettell.activity.OtherLoginActivity">
+        <activity android:name="com.feicui.teach.sockettell.activity.MapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
