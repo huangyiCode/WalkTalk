@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.feicui.teach.sockettell.view.CircleImageView
+            android:id="@+id/iv_home_photo"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/tv_home_name"
+            android:layout_marginTop="20dp"
+            android:text="NAME"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <TextView
+        android:gravity="center"
+        android:text="地图"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/tv_home_map" />
+
+    <TextView
+        android:gravity="center"
+        android:text="TITTLE"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/textView" />
+
+    <TextView
+        android:id="@+id/tv_home_shared"
+        android:gravity="center"
+        android:text="TITTLE"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
+
+</LinearLayout>
